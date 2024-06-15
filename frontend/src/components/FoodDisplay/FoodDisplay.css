@@ -1,0 +1,58 @@
+.food-display {
+    margin-top: 30px;
+}
+
+.food-display h2 {
+    font-size: max(2vw, 24px);
+    font-weight: 600;
+}
+
+.food-display-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    margin-top: 30px;
+    gap: 30px;
+    row-gap: 50px;
+}
+
+.food-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 300px;  /* Set a fixed height */
+    padding: 20px;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    transition: transform 0.3s;
+}
+
+.food-item img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.food-item .food-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 10px 0;
+}
+
+.food-item .food-description {
+    font-size: 0.9rem;
+    color: #777;
+    text-align: center;
+}
+
+.food-item .food-price {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ff6347; /* Tomato color */
+}
+
+.food-item:hover {
+    transform: scale(1.05);
+}
+
