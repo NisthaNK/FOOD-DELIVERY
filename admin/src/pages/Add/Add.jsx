@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import './Add.css';
 import { assets } from '../../assets/assets'; // Assuming assets is correctly imported
+import axios from "axios"
+import { ToastContainer, toast } from 'react-toastify'; // Import toast and ToastContainer
+import 'react-toastify/dist/ReactToastify.css'; // Ensure the CSS is imported for ToastContainer
+
 
 const Add = () => {
 
+    const url = "http://localhost:4000"
     const [image,setImage] = useState(false);
 
     const [data,setData] = useState({
@@ -13,20 +18,40 @@ const Add = () => {
         category: "Salad",
     })
 
-    const onChangeHandler = (event){
+    const onChangeHandler = (event) => {
         const name = event.target.name;
         const value = event.target.value;
-        setData(data=>({...data.[name]:value}))
+        setData(data=>({...data,[name]:value}))
     }
 
-    useEffect(()=>{
-        console.log(data);
-    }.[data])
+    const onSubmitHandler = async (event) => {
+        event.preventDefault();
+        const formData = new FormData();
+        formData.append("name",data.name)
+        formData.append("description",data.description)
+        formData.append("price",Number(data.price))
+        formData.append("category",data.category)
+        formData.append("image",image)
+        const response = await axios.post(`${url}/api/food/add`, formData)
+        if (response.data.success){
+            setData({
+                name: "",
+                description: "",
+                price: "",
+                category: "Salad",
+            })
+            setImage(false)
+            toast.success(response.data.message)
+        }
+        else{
+            toast.error(response.data.message)
+        }
+    }
 
 
     return (
         <div className='add'>
-            <form className='flex-col'>
+            <form className='flex-col' onSubmit={onSubmitHandler}>
                 <div className="add-img-upload flex-col">
                     <p>Upload Image</p>
                     <label htmlFor="image">
