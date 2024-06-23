@@ -6,9 +6,9 @@ import { ToastContainer, toast } from 'react-toastify'; // Import toast and Toas
 import 'react-toastify/dist/ReactToastify.css'; // Ensure the CSS is imported for ToastContainer
 
 
-const Add = () => {
+const Add = ({url}) => {
 
-    const url = "http://localhost:4000"
+    
     const [image,setImage] = useState(false);
 
     const [data,setData] = useState({
